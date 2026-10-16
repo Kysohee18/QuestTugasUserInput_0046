@@ -20,8 +20,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             Tugas_limaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                landingpage(modifier = Modifier.padding(innerPadding))
 
-                    )
                 }
             }
         }

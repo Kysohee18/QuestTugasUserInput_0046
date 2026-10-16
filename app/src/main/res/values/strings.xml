@@ -2,5 +2,5 @@
     <string name="app_name">tugas_lima</string>
     <string name="judul">Form_biodata</string>
     <string name="sub">silahkan isi biodata anda di bawah ini !!</string>
-
+    <string name="label_nama_depan">Nama Depan</string>">
 </resources>

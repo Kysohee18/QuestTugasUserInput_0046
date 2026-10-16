@@ -42,12 +42,14 @@ fun landingpage(modifier: Modifier) {
         Column(modifier = Modifier
             .padding(top = 300.dp)
             .fillMaxSize()
-            .clip(shape = RoundedCornerShape(topStart = 55.dp, topEnd = 55.dp))
+            .clip(shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp))
             .background(color = colorResource(id = R.color.card))
             ) {
             ElevatedCard(modifier = Modifier
                 .fillMaxSize(1f)
-                .fillMaxWidth())
+                .fillMaxWidth()
+                )
+
             {
                 Column() {
 

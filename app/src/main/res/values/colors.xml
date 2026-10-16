@@ -10,4 +10,5 @@
 
     //bagian penting
     <color name="ungu_judul">#6200EA</color>
+    <color name="abu_subjudul">#757575</color>
 </resources>

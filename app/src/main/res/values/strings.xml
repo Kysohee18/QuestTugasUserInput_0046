@@ -11,5 +11,5 @@
     //date
     <string name="label_tanggal_lahir">Tanggal Lahir</string>
     <string name="label_experience">Experience</string>
-
+    <string name="label_pilih_skill">Pilih Skill Anda :</string>
 </resources>

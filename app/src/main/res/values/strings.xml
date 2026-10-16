@@ -10,5 +10,6 @@
 
     //date
     <string name="label_tanggal_lahir">Tanggal Lahir</string>
+    <string name="label_experience">Experience</string>
 
 </resources>

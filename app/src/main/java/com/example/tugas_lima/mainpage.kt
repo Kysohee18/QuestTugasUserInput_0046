@@ -48,7 +48,9 @@ import java.util.TimeZone
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun landingpage(modifier: Modifier = Modifier) { //variabel input nama
+fun landingpage(modifier: Modifier = Modifier) {
+    //variabel input nama
+
     var namadepan by remember { mutableStateOf("") }
     var namabelakang by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -64,10 +66,14 @@ fun landingpage(modifier: Modifier = Modifier) { //variabel input nama
     //skill checkbox variable
     val selectedSkill = remember { androidx.compose.runtime.mutableStateListOf<String>() }
     val listSkill = listOf(
-        "UI/UX",
-        "Programming",
-        "Database",
+        stringResource(id = R.string.skill_uiux),
+        stringResource(id = R.string.skill_programming),
+        stringResource(id = R.string.skill_database)
     )
+    //val snackbar
+    val snackbarHostState = remember { androidx.compose.material3.SnackbarHostState() }
+    val scope = androidx.compose.runtime.rememberCoroutineScope()
+
     // Dialog DatePicker sementara
     if (showDatePicker) {
         DatePickerDialog(

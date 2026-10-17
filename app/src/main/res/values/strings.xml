@@ -12,7 +12,10 @@
     <string name="label_experience">Experience</string>
     //skill
     <string name="label_pilih_skill">Pilih Skill Anda :</string>
+    <string name="skill_uiux">UI/UX</string>
+    <string name="skill_programming">Programming</string>
+    <string name="skill_database">Database</string>
 
     //button chcek
-    <string name="tombol_proceed">Proceed</string>
+    <string name="tombol_proceed">Submit</string>
 </resources>

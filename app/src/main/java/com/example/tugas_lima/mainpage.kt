@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DropdownMenuItem
@@ -46,7 +47,9 @@ import java.util.TimeZone
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun landingpage(modifier: Modifier = Modifier) {
+fun landingpage(modifier: Modifier = Modifier)
+
+{ //variabel input nama
     var namadepan by remember { mutableStateOf("") }
     var namabelakang by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -55,11 +58,16 @@ fun landingpage(modifier: Modifier = Modifier) {
     var tglLahir by remember { mutableStateOf("") }
     var showDatePicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState()
-
+//variable experince
     var experience by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     val listExperience = listOf("1-2 Tahun", "3-5 Tahun", "5-10 Tahun", "> 10 Tahun")
-
+    //skill checkbox variable
+    val listSkill = listOf(
+        "UI/UX",
+        "Programming",
+        "Cybersecurity",
+    )
     // Dialog DatePicker sementara
     if (showDatePicker) {
         DatePickerDialog(
@@ -230,7 +238,15 @@ fun landingpage(modifier: Modifier = Modifier) {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
-                    ) { }
+                    ) {
+                        listSkill.forEach { skill ->
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Checkbox(
+                                    checked = selectedSkill.contains(skill),
+                                    onCheckedChange = { isChecked ->
+                                        if (isChecked) selectedSkill.add(skill) else selectedSkill.remove(skill)
+                                    }
+                    }
                 }
             }
         }

@@ -48,9 +48,7 @@ fun landingpage(modifier: Modifier = Modifier) {
     var namadepan by remember { mutableStateOf("") }
     var namabelakang by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
-    val listSkill = listOf(
-        "Android", "UI/UX", "web"
-    )
+
 
     // Variabel untuk DatePicker
     var tglLahir by remember { mutableStateOf("") }
@@ -163,18 +161,15 @@ fun landingpage(modifier: Modifier = Modifier) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
+                    )
+                    {
                         Box(modifier = Modifier.weight(1f)) {
                             OutlinedTextField(
                                 value = tglLahir,
                                 onValueChange = { },
                                 readOnly = true,
                                 label = { Text(text = stringResource(id = R.string.label_tanggal_lahir)) },
-                                trailingIcon = {
-                                    IconButton(onClick = { showDatePicker = true }) {
-                                        Text(text = "")
-                                    }
-                                },
+
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(15.dp)
                             )
@@ -186,9 +181,12 @@ fun landingpage(modifier: Modifier = Modifier) {
                                         indication = null
                                     ) { showDatePicker = true }
                             )
+
                         }
 
+
                     }
+
 
                 }
             }

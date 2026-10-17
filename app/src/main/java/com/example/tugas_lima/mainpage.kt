@@ -16,11 +16,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -51,8 +51,7 @@ fun landingpage(modifier: Modifier = Modifier) {
     var namabelakang by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
 
-
-    // Variabel untuk DatePicker
+    // variabel datepicker
     var tglLahir by remember { mutableStateOf("") }
     var showDatePicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState()
@@ -61,8 +60,7 @@ fun landingpage(modifier: Modifier = Modifier) {
     var expanded by remember { mutableStateOf(false) }
     val listExperience = listOf("1-2 Tahun", "3-5 Tahun", "5-10 Tahun", "> 10 Tahun")
 
-
-    // Dialog DatePicker
+    // Dialog DatePicker sementara
     if (showDatePicker) {
         DatePickerDialog(
             onDismissRequest = { showDatePicker = false },
@@ -205,12 +203,23 @@ fun landingpage(modifier: Modifier = Modifier) {
                                 },
                                 modifier = Modifier.menuAnchor().fillMaxWidth(),
                                 shape = RoundedCornerShape(15.dp)
-
-
                                 )
+                            ExposedDropdownMenu(
+                                expanded = expanded,
+                                onDismissRequest = { expanded = false }
+                            ){
+                                listExperience.forEach { pilihan ->
+                                    DropdownMenuItem(
+                                        text = { Text(text = pilihan) },
+                                        onClick = {
+                                            experience = pilihan
+                                            expanded = false
+                                        }
+                                    )
+                                }
+                            }
+                        }
                     }
-
-
                 }
             }
         }

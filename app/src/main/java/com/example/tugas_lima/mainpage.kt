@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
@@ -43,6 +44,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -99,10 +101,12 @@ fun landingpage(modifier: Modifier = Modifier) {
         )
         Column(
             modifier = Modifier
-                .padding(top = 300.dp)
-                .fillMaxSize()
-                .background(colorResource(id = R.color.black))
-                .clip(shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp))
+                .padding(top = 200.dp)
+                .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp),
+
+                    )
+
         ) {
             ElevatedCard(
                 modifier = Modifier
@@ -252,6 +256,7 @@ fun landingpage(modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),
+
                         enabled = email.isNotEmpty() &&
                                 tglLahir.isNotEmpty() &&
                                 namadepan.isNotEmpty() &&
@@ -262,7 +267,7 @@ fun landingpage(modifier: Modifier = Modifier) {
                             containerColor = colorResource(id = R.color.ungu_judul),
                             contentColor = Color.White
                         ),
-                        shape = RoundedCornerShape(15.dp),
+                        shape = RoundedCornerShape(80.dp),
                         onClick = {
                             scope.launch {
                                 val skillListText = selectedSkill.joinToString(", ")

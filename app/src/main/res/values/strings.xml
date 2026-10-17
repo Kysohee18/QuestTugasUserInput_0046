@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">tugas_lima</string>
     <string name="judul">Form biodata</string>
-    <string name="sub">silahkan isi biodata anda di bawah ini !!</string>
+    <string name="sub">silahkan isi biodata anda di bawah ini </string>
     <string name="label_nama_depan">Nama Depan</string>
     <string name="label_nama_belakang">Nama Belakang</string>
     <string name="label_email">Email</string>

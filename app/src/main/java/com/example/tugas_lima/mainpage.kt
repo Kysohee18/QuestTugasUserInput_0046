@@ -18,6 +18,7 @@ import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -57,7 +58,7 @@ fun landingpage(modifier: Modifier = Modifier) {
 
     var experience by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
-    val listExperience = listOf("1-2 Tahun", "3-5 Tahun", "5+ Tahun")
+    val listExperience = listOf("1-2 Tahun", "3-5 Tahun", "5-10 Tahun", "> 10 Tahun")
 
 
     // Dialog DatePicker
@@ -188,6 +189,18 @@ fun landingpage(modifier: Modifier = Modifier) {
                             )
 
                         }
+                        ExposedDropdownMenuBox(
+                            expanded = expanded,
+                            onExpandedChange = { expanded = !expanded }
+                        ) {
+                            OutlinedTextField(
+                                value = experience,
+                                onValueChange = { },
+                                readOnly = true,
+                                label = { Text(text = stringResource(id = R.string.label_experience)) },
+                                trailingIcon = {
+                                    IconButton(onClick = { expanded = !expanded }) {
+
 
 
                     }

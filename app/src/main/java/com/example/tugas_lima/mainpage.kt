@@ -40,6 +40,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -47,9 +48,7 @@ import java.util.TimeZone
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun landingpage(modifier: Modifier = Modifier)
-
-{ //variabel input nama
+fun landingpage(modifier: Modifier = Modifier) { //variabel input nama
     var namadepan by remember { mutableStateOf("") }
     var namabelakang by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -63,10 +62,11 @@ fun landingpage(modifier: Modifier = Modifier)
     var expanded by remember { mutableStateOf(false) }
     val listExperience = listOf("1-2 Tahun", "3-5 Tahun", "5-10 Tahun", "> 10 Tahun")
     //skill checkbox variable
+    val selectedSkill = remember { androidx.compose.runtime.mutableStateListOf<String>() }
     val listSkill = listOf(
         "UI/UX",
         "Programming",
-        "Cybersecurity",
+        "Database",
     )
     // Dialog DatePicker sementara
     if (showDatePicker) {
@@ -76,9 +76,10 @@ fun landingpage(modifier: Modifier = Modifier)
                 TextButton(
                     onClick = {
                         datePickerState.selectedDateMillis?.let { millis ->
-                            val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).apply {
-                                timeZone = TimeZone.getTimeZone("UTC")
-                            }
+                            val formatter =
+                                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).apply {
+                                    timeZone = TimeZone.getTimeZone("UTC")
+                                }
                             tglLahir = formatter.format(Date(millis))
                         }
                         showDatePicker = false
@@ -211,11 +212,11 @@ fun landingpage(modifier: Modifier = Modifier)
                                 },
                                 modifier = Modifier.menuAnchor().fillMaxWidth(),
                                 shape = RoundedCornerShape(15.dp)
-                                )
+                            )
                             ExposedDropdownMenu(
                                 expanded = expanded,
                                 onDismissRequest = { expanded = false }
-                            ){
+                            ) {
                                 listExperience.forEach { pilihan ->
                                     DropdownMenuItem(
                                         text = { Text(text = pilihan) },
@@ -232,6 +233,7 @@ fun landingpage(modifier: Modifier = Modifier)
                     // checkbox
                     Text(
                         text = stringResource(id = R.string.label_pilih_skill),
+                        fontSize = 15.sp,
                         modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
                     )
                     Row(
@@ -244,8 +246,17 @@ fun landingpage(modifier: Modifier = Modifier)
                                 Checkbox(
                                     checked = selectedSkill.contains(skill),
                                     onCheckedChange = { isChecked ->
-                                        if (isChecked) selectedSkill.add(skill) else selectedSkill.remove(skill)
+                                        if (isChecked) {
+                                            selectedSkill.add(skill)
+                                        } else {
+                                            selectedSkill.remove(skill)
+                                        }
                                     }
+                                )
+                                Text(text = skill, fontSize = 14.sp)
+                            }
+
+                        }
                     }
                 }
             }

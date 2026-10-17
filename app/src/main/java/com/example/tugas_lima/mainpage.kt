@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
@@ -24,17 +26,23 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -45,34 +53,37 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun landingpage(modifier: Modifier = Modifier) {
-    //variabel input nama
-
+    // Variabel input nama & email
     var namadepan by remember { mutableStateOf("") }
     var namabelakang by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
 
-    // variabel datepicker
+    // Variabel datepicker
     var tglLahir by remember { mutableStateOf("") }
     var showDatePicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState()
-//variable experince
+
+    // Variabel experience
     var experience by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     val listExperience = listOf("1-2 Tahun", "3-5 Tahun", "5-10 Tahun", "> 10 Tahun")
-    //skill checkbox variable
-    val selectedSkill = remember { androidx.compose.runtime.mutableStateListOf<String>() }
+
+    // Variabel skill checkbox
+    val selectedSkill = remember { mutableStateListOf<String>() }
     val listSkill = listOf(
         stringResource(id = R.string.skill_uiux),
         stringResource(id = R.string.skill_programming),
         stringResource(id = R.string.skill_database)
     )
-    //val snackbar
-    val snackbarHostState = remember { androidx.compose.material3.SnackbarHostState() }
-    val scope = androidx.compose.runtime.rememberCoroutineScope()
+
+    // Snackbar & CoroutineScope
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
     // Dialog DatePicker sementara
     if (showDatePicker) {
@@ -82,10 +93,9 @@ fun landingpage(modifier: Modifier = Modifier) {
                 TextButton(
                     onClick = {
                         datePickerState.selectedDateMillis?.let { millis ->
-                            val formatter =
-                                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).apply {
-                                    timeZone = TimeZone.getTimeZone("UTC")
-                                }
+                            val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).apply {
+                                timeZone = TimeZone.getTimeZone("UTC")
+                            }
                             tglLahir = formatter.format(Date(millis))
                         }
                         showDatePicker = false
@@ -105,7 +115,8 @@ fun landingpage(modifier: Modifier = Modifier) {
     }
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .background(colorResource(id = R.color.black))
     ) {
         Image(
@@ -118,8 +129,8 @@ fun landingpage(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(top = 300.dp)
                 .fillMaxSize()
+                .background(colorResource(id = R.color.black))
                 .clip(shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp))
-
         ) {
             ElevatedCard(
                 modifier = Modifier
@@ -131,9 +142,6 @@ fun landingpage(modifier: Modifier = Modifier) {
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp),
-
-
-
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
@@ -177,19 +185,17 @@ fun landingpage(modifier: Modifier = Modifier) {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    //datepicker
+                    // DatePicker
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    )
-                    {
+                    ) {
                         Box(modifier = Modifier.weight(1f)) {
                             OutlinedTextField(
                                 value = tglLahir,
                                 onValueChange = { },
                                 readOnly = true,
                                 label = { Text(text = stringResource(id = R.string.label_tanggal_lahir)) },
-
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(15.dp)
                             )
@@ -201,7 +207,6 @@ fun landingpage(modifier: Modifier = Modifier) {
                                         indication = null
                                     ) { showDatePicker = true }
                             )
-
                         }
                         ExposedDropdownMenuBox(
                             expanded = expanded,
@@ -216,7 +221,9 @@ fun landingpage(modifier: Modifier = Modifier) {
                                 trailingIcon = {
                                     ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
                                 },
-                                modifier = Modifier.menuAnchor().fillMaxWidth(),
+                                modifier = Modifier
+                                    .menuAnchor()
+                                    .fillMaxWidth(),
                                 shape = RoundedCornerShape(15.dp)
                             )
                             ExposedDropdownMenu(
@@ -236,11 +243,14 @@ fun landingpage(modifier: Modifier = Modifier) {
                         }
                     }
                     Spacer(modifier = Modifier.height(15.dp))
-                    // checkbox
+
+                    // Checkbox Skill
                     Text(
                         text = stringResource(id = R.string.label_pilih_skill),
                         fontSize = 15.sp,
-                        modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 8.dp)
                     )
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -261,11 +271,63 @@ fun landingpage(modifier: Modifier = Modifier) {
                                 )
                                 Text(text = skill, fontSize = 14.sp)
                             }
-
                         }
+                    }
+                    Spacer(modifier = Modifier.height(32.dp))
+
+                    // Tombol Submit
+                    Button(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(50.dp),
+                        enabled = email.isNotEmpty() &&
+                                tglLahir.isNotEmpty() &&
+                                namadepan.isNotEmpty() &&
+                                namabelakang.isNotEmpty() &&
+                                experience.isNotEmpty() &&
+                                selectedSkill.isNotEmpty(),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = colorResource(id = R.color.ungu_judul),
+                            contentColor = Color.White
+                        ),
+                        shape = RoundedCornerShape(15.dp),
+                        onClick = {
+                            scope.launch {
+                                val skillListText = selectedSkill.joinToString(", ")
+                                val infoBiodata = """
+                                    Nama Depan: $namadepan
+                                    Nama Belakang: $namabelakang
+                                    Email: $email
+                                    Tanggal Lahir: $tglLahir
+                                    Pengalaman: $experience
+                                    Skill: $skillListText
+                                """.trimIndent()
+
+                                snackbarHostState.showSnackbar(
+                                    message = infoBiodata,
+                                    actionLabel = "OK",
+                                    withDismissAction = true
+                                )
+                            }
+                        }
+                    ) {
+                        Text(stringResource(id = R.string.button_submit))
                     }
                 }
             }
+        }
+
+
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 16.dp),
+
+
+        ) {
+            Snackbar(
+                snackb
         }
     }
 }

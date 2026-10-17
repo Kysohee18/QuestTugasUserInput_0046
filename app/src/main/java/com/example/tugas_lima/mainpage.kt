@@ -19,6 +19,7 @@ import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -191,7 +192,8 @@ fun landingpage(modifier: Modifier = Modifier) {
                         }
                         ExposedDropdownMenuBox(
                             expanded = expanded,
-                            onExpandedChange = { expanded = !expanded }
+                            onExpandedChange = { expanded = !expanded },
+                            modifier = Modifier.weight(1f)
                         ) {
                             OutlinedTextField(
                                 value = experience,
@@ -199,10 +201,13 @@ fun landingpage(modifier: Modifier = Modifier) {
                                 readOnly = true,
                                 label = { Text(text = stringResource(id = R.string.label_experience)) },
                                 trailingIcon = {
-                                    IconButton(onClick = { expanded = !expanded }) {
+                                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                                },
+                                modifier = Modifier.menuAnchor().fillMaxWidth(),
+                                shape = RoundedCornerShape(15.dp)
 
 
-
+                                )
                     }
 
 

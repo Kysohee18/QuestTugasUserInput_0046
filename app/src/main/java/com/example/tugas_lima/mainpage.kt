@@ -57,6 +57,11 @@ fun landingpage(modifier: Modifier = Modifier) {
     var showDatePicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState()
 
+    var experience by remember { mutableStateOf("") }
+    var expanded by remember { mutableStateOf(false) }
+    val listExperience = listOf("1-2 Tahun", "3-5 Tahun", "5+ Tahun")
+
+
     // Dialog DatePicker
     if (showDatePicker) {
         DatePickerDialog(
@@ -182,7 +187,9 @@ fun landingpage(modifier: Modifier = Modifier) {
                                     ) { showDatePicker = true }
                             )
                         }
+
                     }
+
                 }
             }
         }

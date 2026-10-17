@@ -91,11 +91,12 @@ fun landingpage(modifier: Modifier = Modifier) {
 
     Box(
         modifier = Modifier.fillMaxSize()
+            .background(colorResource(id = R.color.black))
     ) {
         Image(
             painter = painterResource(id = R.drawable.persona),
             contentDescription = null,
-            modifier = modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
         Column(
@@ -103,17 +104,21 @@ fun landingpage(modifier: Modifier = Modifier) {
                 .padding(top = 300.dp)
                 .fillMaxSize()
                 .clip(shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp))
-                .background(color = colorResource(id = R.color.card))
+                .background(color = colorResource(id = R.color.ungu_judul))
         ) {
             ElevatedCard(
                 modifier = Modifier
                     .fillMaxSize(1f)
                     .fillMaxWidth()
+                    .background(colorResource(id = R.color.black))
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp),
+                        .padding(16.dp)
+                        .background(colorResource(id = R.color.white)),
+
+
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(

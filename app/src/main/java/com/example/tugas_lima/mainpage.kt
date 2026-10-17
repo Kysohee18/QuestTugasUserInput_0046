@@ -220,6 +220,12 @@ fun landingpage(modifier: Modifier = Modifier) {
                             }
                         }
                     }
+                    Spacer(modifier = Modifier.height(15.dp))
+                    // checkbox
+                    Text(
+                        text = stringResource(id = R.string.label_pilih_skill),
+                        modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+                    )
                 }
             }
         }

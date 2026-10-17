@@ -12,7 +12,15 @@
     <string name="skill_uiux">UI/UX</string>
     <string name="skill_programming">Programming</string>
     <string name="skill_database">Database</string>
-
+//EXPERIENCE
+    <string name="exp_1">1-2 Tahun</string>
+    <string name="exp_2">3-5 Tahun</string>
+    <string name="exp_3">5-10 Tahun</string>
+    <string name="exp_4">&gt; 10 Tahun</string>
+//DIALGO
+    <string name="btn_ok">OK</string>
+    <string name="btn_batal">Batal</string>
+    
     <string name="button_submit">Submit</string>
     <string name="tombol_proceed">Proceed</string>
 </resources>

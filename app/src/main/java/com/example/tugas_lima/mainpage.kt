@@ -42,9 +42,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -73,7 +70,12 @@ fun landingpage(modifier: Modifier = Modifier) {
     // Variabel experience
     var experience by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
-    val listExperience = listOf("1-2 Tahun", "3-5 Tahun", "5-10 Tahun", "> 10 Tahun")
+    val listExperience = listOf(
+        stringResource(id = R.string.exp_1),
+        stringResource(id = R.string.exp_2),
+        stringResource(id = R.string.exp_3),
+        stringResource(id = R.string.exp_4)
+    )
 
     // Variabel skill checkbox
     val selectedSkill = remember { mutableStateListOf<String>() }
@@ -83,10 +85,18 @@ fun landingpage(modifier: Modifier = Modifier) {
         stringResource(id = R.string.skill_database)
     )
 
+    // String Resources untuk Label Biodata
+    val lblNamaDepan = stringResource(id = R.string.label_nama_depan)
+    val lblNamaBelakang = stringResource(id = R.string.label_nama_belakang)
+    val lblEmail = stringResource(id = R.string.label_email)
+    val lblTglLahir = stringResource(id = R.string.label_tanggal_lahir)
+    val lblExperience = stringResource(id = R.string.label_experience)
+    val lblSkill = stringResource(id = R.string.label_pilih_skill)
+    val btnOkText = stringResource(id = R.string.btn_ok)
+
     // Snackbar & CoroutineScope
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
-
 
     Box(
         modifier = Modifier
@@ -103,16 +113,18 @@ fun landingpage(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(top = 200.dp)
                 .fillMaxWidth()
-                .clip(shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp),
-
-                    )
-
         ) {
             ElevatedCard(
                 modifier = Modifier
-                    .fillMaxSize(1f)
-                    .fillMaxWidth()
-                    .background(colorResource(id = R.color.black))
+                    .fillMaxSize()
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp),
+                elevation = CardDefaults.elevatedCardElevation(
+                    defaultElevation = 8.dp
+                ),
+                colors = CardDefaults.elevatedCardColors(
+                    containerColor = colorResource(id = R.color.white)
+                )
             ) {
                 Column(
                     modifier = Modifier
@@ -256,7 +268,6 @@ fun landingpage(modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),
-
                         enabled = email.isNotEmpty() &&
                                 tglLahir.isNotEmpty() &&
                                 namadepan.isNotEmpty() &&
@@ -265,24 +276,25 @@ fun landingpage(modifier: Modifier = Modifier) {
                                 selectedSkill.isNotEmpty(),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = colorResource(id = R.color.ungu_judul),
-                            contentColor = Color.White
+                            contentColor = colorResource(id = R.color.putih_bersih)
                         ),
                         shape = RoundedCornerShape(80.dp),
                         onClick = {
                             scope.launch {
                                 val skillListText = selectedSkill.joinToString(", ")
+
                                 val infoBiodata = """
-                                    Nama Depan: $namadepan
-                                    Nama Belakang: $namabelakang
-                                    Email: $email
-                                    Tanggal Lahir: $tglLahir
-                                    Pengalaman: $experience
-                                    Skill: $skillListText
+                                    $lblNamaDepan: $namadepan
+                                    $lblNamaBelakang: $namabelakang
+                                    $lblEmail: $email
+                                    $lblTglLahir: $tglLahir
+                                    $lblExperience: $experience
+                                    $lblSkill: $skillListText
                                 """.trimIndent()
 
                                 snackbarHostState.showSnackbar(
                                     message = infoBiodata,
-                                    actionLabel = "OK",
+                                    actionLabel = btnOkText,
                                     withDismissAction = true
                                 )
                             }
@@ -294,26 +306,23 @@ fun landingpage(modifier: Modifier = Modifier) {
             }
         }
 
-
         SnackbarHost(
             hostState = snackbarHostState,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 16.dp),
-
-
-        ) {data ->
-            androidx.compose.material3.Snackbar(
+                .padding(bottom = 16.dp)
+        ) { data ->
+            Snackbar(
                 snackbarData = data,
                 shape = RoundedCornerShape(24.dp),
-                containerColor = Color(0xFF2A2A2A),
-                contentColor = Color.White,
-                actionColor = Color.Cyan
+                containerColor = colorResource(id = R.color.snackbar_bg),
+                contentColor = colorResource(id = R.color.putih_bersih),
+                actionColor = colorResource(id = R.color.snackbar_action)
             )
-
         }
     }
-    //dialog datatime picker
+
+    // Dialog DatePicker
     if (showDatePicker) {
         DatePickerDialog(
             onDismissRequest = { showDatePicker = false },
@@ -329,17 +338,16 @@ fun landingpage(modifier: Modifier = Modifier) {
                         showDatePicker = false
                     }
                 ) {
-                    Text("OK")
+                    Text(stringResource(id = R.string.btn_ok))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDatePicker = false }) {
-                    Text("Batal")
+                    Text(stringResource(id = R.string.btn_batal))
                 }
             }
         ) {
             DatePicker(state = datePickerState)
         }
     }
-
 }

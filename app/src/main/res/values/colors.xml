@@ -14,4 +14,7 @@
     <color name="abu_tombol">#E0E0E0</color>
     <color name="card">#4E3B38</color>
 
+    <color name="putih_bersih">#FFFFFF</color>
+    <color name="snackbar_bg">#2A2A2A</color>
+    <color name="snackbar_action">#00FFFF</color>
 </resources>

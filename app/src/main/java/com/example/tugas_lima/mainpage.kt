@@ -113,7 +113,7 @@ fun landingpage(modifier: Modifier = Modifier) { //variabel input nama
                 .padding(top = 300.dp)
                 .fillMaxSize()
                 .clip(shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp))
-                .background(color = colorResource(id = R.color.ungu_judul))
+
         ) {
             ElevatedCard(
                 modifier = Modifier
@@ -124,8 +124,8 @@ fun landingpage(modifier: Modifier = Modifier) { //variabel input nama
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp)
-                        .background(colorResource(id = R.color.white)),
+                        .padding(16.dp),
+
 
 
                     horizontalAlignment = Alignment.CenterHorizontally

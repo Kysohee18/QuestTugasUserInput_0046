@@ -226,6 +226,11 @@ fun landingpage(modifier: Modifier = Modifier) {
                         text = stringResource(id = R.string.label_pilih_skill),
                         modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
                     )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) { }
                 }
             }
         }

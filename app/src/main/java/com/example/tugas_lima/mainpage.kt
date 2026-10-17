@@ -85,34 +85,6 @@ fun landingpage(modifier: Modifier = Modifier) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
-    // Dialog DatePicker sementara
-    if (showDatePicker) {
-        DatePickerDialog(
-            onDismissRequest = { showDatePicker = false },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        datePickerState.selectedDateMillis?.let { millis ->
-                            val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).apply {
-                                timeZone = TimeZone.getTimeZone("UTC")
-                            }
-                            tglLahir = formatter.format(Date(millis))
-                        }
-                        showDatePicker = false
-                    }
-                ) {
-                    Text("OK")
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { showDatePicker = false }) {
-                    Text("Batal")
-                }
-            }
-        ) {
-            DatePicker(state = datePickerState)
-        }
-    }
 
     Box(
         modifier = Modifier
@@ -325,9 +297,44 @@ fun landingpage(modifier: Modifier = Modifier) {
                 .padding(bottom = 16.dp),
 
 
-        ) {
-            Snackbar(
-                snackb
+        ) {data ->
+            androidx.compose.material3.Snackbar(
+                snackbarData = data,
+                shape = RoundedCornerShape(24.dp),
+                containerColor = Color(0xFF2A2A2A),
+                contentColor = Color.White,
+                actionColor = Color.Cyan
+            )
+
         }
     }
+    //dialog datatime picker
+    if (showDatePicker) {
+        DatePickerDialog(
+            onDismissRequest = { showDatePicker = false },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        datePickerState.selectedDateMillis?.let { millis ->
+                            val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).apply {
+                                timeZone = TimeZone.getTimeZone("UTC")
+                            }
+                            tglLahir = formatter.format(Date(millis))
+                        }
+                        showDatePicker = false
+                    }
+                ) {
+                    Text("OK")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDatePicker = false }) {
+                    Text("Batal")
+                }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+
 }
